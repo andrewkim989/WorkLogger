@@ -1,0 +1,66 @@
+.App {
+  margin: auto;
+  padding-top: 20px;
+  text-align: center;
+}
+#wrapper {
+  background-color: lightgrey;
+}
+#workform {
+  text-align: left;
+  margin: auto;
+  padding: 20px;
+  padding-left: 30px;
+  border-radius: 8px;
+  width: 550px;
+  background-color: rgb(173, 188, 230);
+}
+input[type = number]{
+  width: 60px;
+}
+.error {
+  color: rgb(231, 48, 48);
+  margin-bottom: 5px;
+}
+#blackline {
+  height: 2px;
+  background-color: black;
+  margin-top: 30px;
+}
+h3 {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+h5 {
+  float: right;
+  margin-right: 10px;
+}
+#personal {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  width: 500px;
+  background-color: rgb(136, 188, 206);
+  margin: 30px;
+  padding: 15px;
+  border-radius: 7px;
+}
+#work {
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  width: 500px;
+  background-color: rgb(106, 211, 106);
+  margin: 30px;
+  padding: 15px;
+  border-radius: 7px;
+}
+ul {
+  list-style-type: none;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+li h6 {
+  display: inline-block;
+}
