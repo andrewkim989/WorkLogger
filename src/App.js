@@ -65,39 +65,32 @@ class App extends Component {
   submitinput(e) {
     e.preventDefault();
     if (this.state.type === "personal") {
-      this.state.personal.push({desc: this.state.desc, time: this.state.time});
-      this.sort(this.state.personal);
+      this.setState({personal: [...this.state.personal, {desc: this.state.desc, time: this.state.time}]});
       this.showPersonal();
     }
     else {
-      this.state.work.push({desc: this.state.desc, time: this.state.time});
-      this.sort(this.state.work);
+      this.setState({work: [...this.state.work, {desc: this.state.desc, time: this.state.time}]});
       this.showWork();
     }
     this.setState({desc: "", time: "", submit: false});
   }
 
-  sort(array) {
-    return array.sort(function(a, b) {
-      return b.time - a.time;
-    });
-  }
-
   showPersonal() {
-    var p = [];
     var psum = 0;
 
-    for (var i = 0; i < this.state.personal.length; i++) {
-      psum = psum + parseInt(this.state.personal[i].time);
-      var phour = parseInt(this.state.personal[i].time / 60);
-      var pminute = this.state.personal[i].time % 60;
+    this.state.personal.sort((a, b) => {return b.time - a.time;});
+    
+    var p = this.state.personal.map((personal, i) => {
+      psum = psum + parseInt(personal.time);
+      var phour = parseInt(personal.time / 60);
+      var pminute = personal.time % 60;
       if (pminute < 10) {
-        p.push(<li key = {i}><h6>{phour}:0{pminute}</h6> - {this.state.personal[i].desc}</li>);
+        return(<li key = {i}><h6>{phour}:0{pminute}</h6> - {personal.desc}</li>);
       }
       else {
-        p.push(<li key = {i}><h6>{phour}:{pminute}</h6> - {this.state.personal[i].desc}</li>);
+        return(<li key = {i}><h6>{phour}:{pminute}</h6> - {personal.desc}</li>);
       }
-    }
+    });
 
     var ptotalhour = parseInt(psum / 60);
     var ptotalminute = psum % 60;
@@ -120,20 +113,22 @@ class App extends Component {
   }
 
   showWork() {
-    var w = [];
     var wsum = 0;
 
-    for (var j = 0; j < this.state.work.length; j++) {
-      wsum = wsum + parseInt(this.state.work[j].time);
-      var whour = parseInt(this.state.work[j].time / 60);
-      var wminute = this.state.work[j].time % 60;
+    this.state.work.sort((a, b) => {return b.time - a.time;});
+
+    var w = this.state.work.map((work, j) => {
+      wsum = wsum + parseInt(work.time);
+      var whour = parseInt(work.time / 60);
+      var wminute = work.time % 60;
       if (wminute < 10) {
-        w.push(<li key = {j}><h6>{whour}:0{wminute}</h6> - {this.state.work[j].desc}</li>);
+        return(<li key = {j}><h6>{whour}:0{wminute}</h6> - {work.desc}</li>);
       }
       else {
-        w.push(<li key = {j}><h6>{whour}:{wminute}</h6> - {this.state.work[j].desc}</li>);
+        return(<li key = {j}><h6>{whour}:{wminute}</h6> - {work.desc}</li>);
       }
-    }
+    });
+    
     var wtotalhour = parseInt(wsum / 60);
     var wtotalminute = wsum % 60;
     var wtotaltime;
